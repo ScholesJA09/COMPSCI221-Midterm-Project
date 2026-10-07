@@ -1,5 +1,8 @@
 ﻿using System;
+<<<<<<< HEAD
 using System.IO;
+=======
+>>>>>>> 8d85eeb5c4cd174d42f8170218b8058b85d6bf0a
 
 namespace COMPSCI221_Midterm_Project
 {
@@ -46,6 +49,7 @@ namespace COMPSCI221_Midterm_Project
 
         static void Main()
         {
+<<<<<<< HEAD
             //Task 2/4
             string path = "books.csv";
             Book[] books = ReadBooksFromFile(path);
@@ -53,6 +57,9 @@ namespace COMPSCI221_Midterm_Project
             {
                 Console.WriteLine(books[i]);
             }
+=======
+            Console.WriteLine("Test");
+>>>>>>> 8d85eeb5c4cd174d42f8170218b8058b85d6bf0a
         }
     }
 }
