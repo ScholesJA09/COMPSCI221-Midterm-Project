@@ -35,11 +35,12 @@ namespace COMPSCI221_Midterm_Project
                 string line = reader.ReadLine();
                 string[] cols = line.Split(',');
                 string title = cols[0];
-                string directorLast = cols[1];
-                string directorFirst = cols[2];
-                int year = int.Parse(cols[3]);
-                double rating = double.Parse(cols[4]);
-                movies[i] = new Book(title, year, directorFirst, directorLast,rating);
+                string author = cols[1];
+                string genre = cols[2];
+                int pageLength = int.Parse(cols[3]);
+                int yearPublished = int.Parse(cols[4]);
+                bool checkedOut = bool.Parse(cols[5]);
+                movies[i] = new Book(title, author, genre, pageLength, yearPublished, checkedOut);
             }
             return movies;
         }
