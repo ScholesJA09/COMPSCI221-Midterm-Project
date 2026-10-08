@@ -46,11 +46,13 @@ namespace COMPSCI221_Midterm_Project
                 throw new Exception("Year must be from 1900 to 2026.");
             }
             this.yearPublished = yearPublished;
+
+            this.checkedOut = checkedOut;
         }
 
         public override string ToString()
         {
-            return $"{title} written by {author} was published in {yearPublished}.\nIt's genre is {genre} with a page length of {pageLength}.\nChecked Out: {checkedOut}";
+            return $"{title} written by {author} was published in {yearPublished}.\nIt's genre is {genre} with a page length of {pageLength}.\nChecked Out: {checkedOut}\n";
         }
 
         public string Title

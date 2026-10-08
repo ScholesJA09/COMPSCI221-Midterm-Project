@@ -27,10 +27,10 @@ namespace COMPSCI221_Midterm_Project
                 throw new FileNotFoundException("File not found.", path);
             }
             int lineCount = GetLineCount(path);
-            Book[] movies = new Book[lineCount - 1];
+            Book[] books = new Book[lineCount - 1];
             using StreamReader reader = new StreamReader(path);
             reader.ReadLine();
-            for (int i = 0; i < movies.Length; i++)
+            for (int i = 0; i < books.Length; i++)
             {
                 string line = reader.ReadLine();
                 string[] cols = line.Split(',');
@@ -40,9 +40,9 @@ namespace COMPSCI221_Midterm_Project
                 int pageLength = int.Parse(cols[3]);
                 int yearPublished = int.Parse(cols[4]);
                 bool checkedOut = bool.Parse(cols[5]);
-                movies[i] = new Book(title, author, genre, pageLength, yearPublished, checkedOut);
+                books[i] = new Book(title, author, genre, pageLength, yearPublished, checkedOut);
             }
-            return movies;
+            return books;
         }
 
         static void Main()
@@ -53,7 +53,6 @@ namespace COMPSCI221_Midterm_Project
             {
                 Console.WriteLine(books[i]);
             }
-            Console.WriteLine("Test");
         }
     }
 }
