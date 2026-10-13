@@ -48,11 +48,71 @@ namespace COMPSCI221_Midterm_Project
         static void Main()
         {
             string path = "books.csv";
-            Book[] books = ReadBooksFromFile(path);
-            for (int i = 0; i < books.Length; i++)
+            //Book[] books = ReadBooksFromFile(path);
+            //for (int i = 0; i < books.Length; i++)
+            //{
+            //    Console.WriteLine(books[i]);
+            //}
+
+            int number = 0;
+            while (number != 9) //Loop until user selcets 9
             {
-                Console.WriteLine(books[i]);
+
+                //Listing out commands
+                Console.WriteLine("Enter the corresponding number to execute the following command:");
+                Console.WriteLine("(1) Print out all books");
+                Console.WriteLine("(2) Print out all books available for check out");
+                Console.WriteLine("(3) Print out all books by given author");
+                Console.WriteLine("(4) Print out all books published on or after a given year");
+                Console.WriteLine("(5) Sort all books by page length");
+                Console.WriteLine("(6) Print out information about a single book given its title");
+                Console.WriteLine("(7) Check out a book");
+                Console.WriteLine("(8) Return a book");
+                Console.WriteLine("(9) Quit");
+                Console.WriteLine();
+
+                //Determining number inputed
+                number = int.Parse(Console.ReadLine());
+
+                if (number > 9 || number < 1)
+                {
+                    throw new Exception("Number must be 1-9.");
+                }
+
+                if (number == 1)
+                {
+                    //Call function 1
+                }
+                else if (number == 2)
+                {
+                    //Call function 2
+                }
+                else if (number == 3)
+                {
+                    //Call function 2
+                }
+                else if (number == 4)
+                {
+                    //Call function 2
+                }
+                else if (number == 5)
+                {
+                    //Call function 2
+                }
+                else if (number == 6)
+                {
+                    //Call function 2
+                }
+                else if (number == 7)
+                {
+                    //Call function 2
+                }
+                else if (number == 8)
+                {
+                    //Call function 2
+                }
             }
+            Console.WriteLine("Come back soon!");
         }
     }
 }
