@@ -17,35 +17,15 @@ namespace COMPSCI221_Midterm_Project
 
         public Book(string title, string author, string genre, int pageLength, int yearPublished, bool checkedOut)
         {
-            if(string.IsNullOrWhiteSpace(title))
-{
-                throw new Exception("Title cannot be null and must have non-zero length.");
-}
-            this.title = title;
+            Title = title;
 
-            if (string.IsNullOrWhiteSpace(author))
-            {
-                throw new Exception("Author cannot be null and must have non-zero length.");
-            }
-            this.author = author;
+            Author = author;
 
-            if (string.IsNullOrWhiteSpace(genre))
-            {
-                throw new Exception("Genre cannot be null and must have non-zero length.");
-            }
-            this.genre = genre;
+            Genre = genre;
 
-            if (pageLength < 1)
-            {
-                throw new Exception("Page length has to be at least 1.");
-            }
-            this.pageLength = pageLength;
+            PageLength = pageLength;
 
-            if (yearPublished < 1900 || yearPublished > 2026)
-            {
-                throw new Exception("Year must be from 1900 to 2026.");
-            }
-            this.yearPublished = yearPublished;
+            YearPublished = yearPublished;
 
             this.checkedOut = checkedOut;
         }
@@ -58,26 +38,66 @@ namespace COMPSCI221_Midterm_Project
         public string Title
         {
             get => title;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Title cannot be null and must have non-zero length.");
+                }
+                title = value;
+            }
         }
 
         public string Author
         {
             get => author;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Author cannot be null and must have non-zero length.");
+                }
+                author = value;
+            }
         }
 
         public string Genre
         {
             get => genre;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Genre cannot be null and must have non-zero length.");
+                }
+                genre = value;
+            }
         }
 
         public int PageLength
         {
             get => pageLength;
+            set
+            {
+                if (value < 1)
+                {
+                    throw new Exception("Page length has to be at least 1.");
+                }
+                pageLength = value;
+            }
         }
 
         public int YearPublished
         {
             get => yearPublished;
+            set
+            {
+                if (value < 1900 || value > 2026)
+                {
+                    throw new Exception("Year must be from 1900 to 2026.");
+                }
+                yearPublished = value;
+            }
         }
 
         public bool CheckedOut

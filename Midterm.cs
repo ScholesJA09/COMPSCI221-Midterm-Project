@@ -44,18 +44,75 @@ namespace COMPSCI221_Midterm_Project
             }
             return books;
         }
+        static void PrintBooks(string path)
+        {
+            Book[] books = ReadBooksFromFile(path);
+            for (int i = 0; i < books.Length; i++)
+            {
+                Console.WriteLine(books[i]);
+            }
+        }
+        static void PrintBooksAvailable(string path)
+        {
+            Book[] books = ReadBooksFromFile(path);
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (!books[i].CheckedOut)
+                {
+                    Console.WriteLine(books[i]);
+                }
+            }
+        }
+        static void PrintBooksByAuthor(string path, string author)
+        {
+            Book[] books = ReadBooksFromFile(path);
+            bool foundAuthor = false;
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (books[i].Author == author)
+                {
+                    Console.WriteLine(books[i]);
+                    foundAuthor = true;
+                }
+            }
+            if (!foundAuthor)
+            {
+                Console.WriteLine($"No books written by {author}.");
+            }
+        }
+        static void SortBooksByTitle(string path)
+        {
+            Book[] books = ReadBooksFromFile(path);
+            for (int i = 0; i < books.Length - 1; i++)
+            {
+                int minIndex = i;
+
+                for (int j = i + 1; j < books.Length; j++)
+                {
+                    if (books[j].Title.CompareTo(books[minIndex].Title) < 0)
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                if (i != minIndex)
+                {
+                    (books[i], books[minIndex]) = (books[minIndex], books[i]);
+                }
+            }
+
+            for (int i = 0; i < books.Length; i++)
+            {
+                Console.WriteLine(books[i]);
+            }
+        }
 
         static void Main()
         {
             string path = "books.csv";
-            //Book[] books = ReadBooksFromFile(path);
-            //for (int i = 0; i < books.Length; i++)
-            //{
-            //    Console.WriteLine(books[i]);
-            //}
 
             int number = 0;
-            while (number != 9) //Loop until user selcets 9
+            while (number != 10) //Loop until user selcets 9
             {
 
                 //Listing out commands
@@ -65,51 +122,58 @@ namespace COMPSCI221_Midterm_Project
                 Console.WriteLine("(3) Print out all books by given author");
                 Console.WriteLine("(4) Print out all books published on or after a given year");
                 Console.WriteLine("(5) Sort all books by page length");
-                Console.WriteLine("(6) Print out information about a single book given its title");
-                Console.WriteLine("(7) Check out a book");
-                Console.WriteLine("(8) Return a book");
-                Console.WriteLine("(9) Quit");
+                Console.WriteLine("(6) Sort all books by title");
+                Console.WriteLine("(7) Print out information about a single book given its title");
+                Console.WriteLine("(8) Check out a book");
+                Console.WriteLine("(9) Return a book");
+                Console.WriteLine("(10) Quit");
                 Console.WriteLine();
 
                 //Determining number inputed
                 number = int.Parse(Console.ReadLine());
 
-                if (number > 9 || number < 1)
+                if (number > 10 || number < 1)
                 {
                     throw new Exception("Number must be 1-9.");
                 }
 
-                if (number == 1)
+                else if (number == 1)
                 {
-                    //Call function 1
+                    PrintBooks(path);
                 }
                 else if (number == 2)
                 {
-                    //Call function 2
+                    PrintBooksAvailable(path);
                 }
                 else if (number == 3)
                 {
-                    //Call function 2
+                    Console.Write("Author: ");
+                    string author = Console.ReadLine();
+                    PrintBooksByAuthor(path, author);
                 }
                 else if (number == 4)
                 {
-                    //Call function 2
+                    //Call function
                 }
                 else if (number == 5)
                 {
-                    //Call function 2
+                    //Call function
                 }
                 else if (number == 6)
                 {
-                    //Call function 2
+                    SortBooksByTitle(path);
                 }
                 else if (number == 7)
                 {
-                    //Call function 2
+                    //Call function
                 }
                 else if (number == 8)
                 {
-                    //Call function 2
+                    //Call function
+                }
+                else if (number == 9)
+                {
+                    //Call function
                 }
             }
             Console.WriteLine("Come back soon!");
