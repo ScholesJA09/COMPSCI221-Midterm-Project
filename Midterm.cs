@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Policy;
 
 namespace COMPSCI221_Midterm_Project
 {
@@ -107,12 +108,81 @@ namespace COMPSCI221_Midterm_Project
             }
         }
 
-        static void Main()
+        static void PrintBooksByYear(string path, int year) {
+			Book[] books = ReadBooksFromFile(path);
+            bool foundYear = false;
+            for (int i = 0; i < books.Length; i++) {
+                if (books[i].YearPublished >= year) {
+                    Console.WriteLine(books[i]);
+                    foundYear = true;
+                }
+            }
+            if (!foundYear) {
+                Console.WriteLine($"No books were published on or after {year}");
+            }
+		}
+        static void SortBooksByPages(string path) {
+            Book[] books = ReadBooksFromFile(path);
+
+            for (int i = 1; i < books.Length; i++) {
+                int j = i;
+                Book tempBook = books[i];
+                while (j > 0 && tempBook.PageLength > books[j-1].PageLength) {
+                    books[j] = books[j - 1];
+                    j--;
+                }
+                books[j] = tempBook;
+            }
+            for (int i = 0; i < books.Length; i++) {
+                Console.WriteLine(books[i]);
+            }
+        }
+		static void PrintBookByTitle(string path, string title) {
+            Book[] books = ReadBooksFromFile(path);
+            int i = 0;
+            int bookID = -1;
+            while (i < books.Length) {
+                if (books[i].Title.ToLower() == title.ToLower()) {
+                    bookID = i;
+                    i = books.Length;
+                }
+                i++;
+            }
+            if (bookID > -1) {
+                Console.WriteLine(books[bookID]);
+            } else {
+                Console.WriteLine($"Couldn't find a book with the title \"{title}\"");
+            }
+        }
+        static void DonateBook(string path) {
+            Book[] books = ReadBooksFromFile(path);
+			using StreamWriter writer = new StreamWriter(path);
+            writer.WriteLine("Title,Author,Genre,Page Length,Year Published,Checked Out");
+			for (int i = 0; i < books.Length; i++) {
+                writer.WriteLine($"{books[i].Title},{books[i].Author},{books[i].Genre},{books[i].PageLength},{books[i].YearPublished},False");
+            }
+            Console.Write("Book title: ");
+            string title = Console.ReadLine();
+            Console.Write("Book author: ");
+            string author = Console.ReadLine();
+			Console.Write("Book genre: ");
+			string genre = Console.ReadLine();
+			Console.Write("Page length: ");
+			int pages = int.Parse(Console.ReadLine());
+			Console.Write("Year published: ");
+			int year = int.Parse(Console.ReadLine());
+            writer.WriteLine($"{title},{author},{genre},{pages},{year},False");
+            Book temp = new Book(title, author, genre, pages, year, false);
+            Console.WriteLine($"You successfully donated the following book:\n{temp}");
+		}
+
+
+		static void Main()
         {
             string path = "books.csv";
 
             int number = 0;
-            while (number != 10) //Loop until user selcets 9
+            while (number != 11) //Loop until user selcets 9
             {
 
                 //Listing out commands
@@ -124,54 +194,47 @@ namespace COMPSCI221_Midterm_Project
                 Console.WriteLine("(5) Sort all books by page length");
                 Console.WriteLine("(6) Sort all books by title");
                 Console.WriteLine("(7) Print out information about a single book given its title");
-                Console.WriteLine("(8) Check out a book");
-                Console.WriteLine("(9) Return a book");
-                Console.WriteLine("(10) Quit");
+                Console.WriteLine("(8) Donate a book");
+                Console.WriteLine("(9) Check out a book");
+                Console.WriteLine("(10) Return a book");
+                Console.WriteLine("(11) Quit");
                 Console.WriteLine();
 
                 //Determining number inputed
                 number = int.Parse(Console.ReadLine());
 
-                if (number > 10 || number < 1)
-                {
-                    throw new Exception("Number must be 1-9.");
-                }
-
-                else if (number == 1)
-                {
+                if (number > 11 || number < 1) {
+                    throw new Exception("Number must be 1-11.");
+                } else if (number == 1) {
                     PrintBooks(path);
-                }
-                else if (number == 2)
-                {
+                } else if (number == 2) {
                     PrintBooksAvailable(path);
-                }
-                else if (number == 3)
-                {
+                } else if (number == 3) {
                     Console.Write("Author: ");
                     string author = Console.ReadLine();
                     PrintBooksByAuthor(path, author);
-                }
-                else if (number == 4)
-                {
-                    //Call function
-                }
-                else if (number == 5)
-                {
-                    //Call function
-                }
-                else if (number == 6)
-                {
+                } else if (number == 4) {
+                    Console.Write("Year: ");
+                    int year = int.Parse(Console.ReadLine());
+                    PrintBooksByYear(path, year);
+                } else if (number == 5) {
+                    SortBooksByPages(path);
+                } else if (number == 6) {
                     SortBooksByTitle(path);
-                }
-                else if (number == 7)
-                {
-                    //Call function
+                } else if (number == 7) {
+                    Console.Write("Title: ");
+                    string title = Console.ReadLine();
+                    PrintBookByTitle(path, title);
                 }
                 else if (number == 8)
                 {
-                    //Call function
+                    DonateBook(path);
                 }
                 else if (number == 9)
+                {
+                    //Call function
+                }
+                else if (number == 10)
                 {
                     //Call function
                 }
