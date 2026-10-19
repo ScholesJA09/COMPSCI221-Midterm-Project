@@ -203,7 +203,7 @@ namespace COMPSCI221_Midterm_Project
                         SaveBooksToFile(path, books);
 
                         DateTime dueDate = DateTime.Now.AddDays(14);
-                        Console.WriteLine($"You checked out{books[i].Title}");
+                        Console.WriteLine($"You checked out {books[i].Title}");
                         Console.WriteLine($"Your book is due on: {dueDate.ToShortDateString()}");
                         Console.WriteLine();
                     }
