@@ -103,6 +103,7 @@ namespace COMPSCI221_Midterm_Project
         public bool CheckedOut
         {
             get => checkedOut;
+            set => checkedOut = value;
         }
 
     }

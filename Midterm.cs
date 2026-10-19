@@ -177,6 +177,100 @@ namespace COMPSCI221_Midterm_Project
 		}
 
 
+        static void CheckOutBook(string path)
+        {
+            Book[] books = ReadBooksFromFile(path);
+
+            Console.Write("Enter the title of the book to check out: ");
+            string title = Console.ReadLine();
+
+            bool foundBook = false;
+
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (books[i].Title.ToLower() == title.ToLower())
+                {
+                    foundBook = true;
+
+                    if (books[i].CheckedOut)
+                    {
+                        Console.WriteLine("That book is already checked out");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        books[i].CheckedOut = true;
+                        SaveBooksToFile(path, books);
+
+                        DateTime dueDate = DateTime.Now.AddDays(14);
+                        Console.WriteLine($"You checked out{books[i].Title}");
+                        Console.WriteLine($"Your book is due on: {dueDate.ToShortDateString()}");
+                        Console.WriteLine();
+                    }
+
+                    break;
+                }
+            }
+
+            if (!foundBook)
+            {
+                Console.WriteLine($"Could not find a book titled {title}");
+                Console.WriteLine();
+            }
+        }
+
+        static void ReturnBook(string path)
+        {
+            Book[] books = ReadBooksFromFile(path);
+
+            Console.Write("Enter the title of the book to return: ");
+            string title = Console.ReadLine();
+
+            bool foundBook = false;
+
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (books[i].Title.ToLower() == title.ToLower())
+                {
+                    foundBook = true;
+
+                    if (!books[i].CheckedOut)
+                    {
+                        Console.WriteLine("That books is not checked out");
+                        Console.WriteLine();
+                    } else
+                    {
+                        books[i].CheckedOut = false;
+                        SaveBooksToFile(path, books);
+
+                        Console.WriteLine($"You returned {books[i].Title}");
+                        Console.WriteLine();
+                    }
+                    break;
+                }
+            }
+            if(!foundBook)
+            {
+                Console.WriteLine($"Could not find a book titled {title}");
+                Console.WriteLine();
+            }
+        }
+
+        static void SaveBooksToFile(string path, Book[] books)
+        {
+            using StreamWriter writer = new StreamWriter(path);
+
+            writer.WriteLine("Title,Author,Genre,Page Length,Year, Published,Checked Out");
+
+            for(int i = 0; i < books.Length; i++)
+            {
+                writer.WriteLine($"{books[i].Title},{books[i].Author},{books[i].Genre}," +
+                                 $"{books[i].PageLength},{books[i].YearPublished}," +
+                                 $"{books[i].CheckedOut}");
+                    
+            }
+        }
+
 		static void Main()
         {
             string path = "books.csv";
@@ -232,11 +326,11 @@ namespace COMPSCI221_Midterm_Project
                 }
                 else if (number == 9)
                 {
-                    //Call function
+                    CheckOutBook(path);
                 }
                 else if (number == 10)
                 {
-                    //Call function
+                    ReturnBook(path);
                 }
             }
             Console.WriteLine("Come back soon!");
