@@ -276,7 +276,7 @@ namespace COMPSCI221_Midterm_Project
             string path = "books.csv";
 
             int number = 0;
-            while (number != 11) //Loop until user selcets 9
+            while (number != 11) //Loop until user selects 11
             {
 
                 //Listing out commands
