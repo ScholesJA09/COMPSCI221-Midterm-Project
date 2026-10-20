@@ -78,7 +78,7 @@ namespace COMPSCI221_Midterm_Project
             }
             if (!foundAuthor)
             {
-                Console.WriteLine($"No books written by {author}.");
+                Console.WriteLine($"No books written by {author}.\n");
             }
         }
         static void SortBooksByTitle(string path)
@@ -151,7 +151,7 @@ namespace COMPSCI221_Midterm_Project
             if (bookID > -1) {
                 Console.WriteLine(books[bookID]);
             } else {
-                Console.WriteLine($"Couldn't find a book with the title \"{title}\"");
+                Console.WriteLine($"Couldn't find a book with the title \"{title}\"\n");
             }
         }
         static void DonateBook(string path) {
@@ -298,7 +298,8 @@ namespace COMPSCI221_Midterm_Project
                 number = int.Parse(Console.ReadLine());
 
                 if (number > 11 || number < 1) {
-                    throw new Exception("Number must be 1-11.");
+                    //throw new Exception("Number must be 1-11.");
+                    Console.WriteLine("Number must be 1-11.\n");
                 } else if (number == 1) {
                     PrintBooks(path);
                 } else if (number == 2) {
